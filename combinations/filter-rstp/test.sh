@@ -16,8 +16,15 @@ fi
 eid=`imunes$legacy -b topo.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
-# wait for RSTP to finish
-sleep 10
+limit=10
+echo "Wait for RSTP to finish ($limit seconds)"
+ctr=0
+while test $ctr -lt $limit; do
+	echo -n "."
+	sleep 1
+	ctr=$((ctr+1))
+done
+echo ""
 
 echo "Checking if link l0 exists:"
 if isOSlinux; then
