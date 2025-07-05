@@ -3,7 +3,7 @@
 . ../../common/procedures.sh
 
 if isOSlinux; then
-	echo "Test not supported on Linux."
+	thereWereErrors "SKIP" "Test not supported on Linux."
 	exit 0
 fi
 

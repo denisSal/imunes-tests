@@ -116,9 +116,21 @@ echo ""
 echo ""
 echo "Finished."
 
+if find . -type f -name 'TESTRESULTS*' -exec grep -q "^SKIPPED:" {} +; then
+	echo ""
+	echo "Skipped tests:"
+	find . -type f -name 'TESTRESULTS*' -exec grep "^SKIPPED:" {} +
+fi
+
+if find . -type f -name 'TESTRESULTS*' -exec grep -q "^WARNING:" {} +; then
+	echo ""
+	echo "Tests with warnings:"
+	find . -type f -name 'TESTRESULTS*' -exec grep "^WARNING:" {} +
+fi
+
 if find . -type f -name 'TESTRESULTS*' -exec grep -q "^There were errors." {} +; then
 	echo ""
-	echo "Please look at the logs:"
+	echo "The following tests failed:"
 	find . -type f -name 'TESTRESULTS*' -exec grep "^There were errors." {} +
 	exit 1
 fi

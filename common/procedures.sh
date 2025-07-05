@@ -42,7 +42,13 @@ thereWereErrors () {
 	end_time=$(date +"%s")
 	diff=$(($end_time-$start_time))
 	echo "Test took $diff seconds."
-	if [ $1 -ne 0 ]; then
+	if [ "$1" = "SKIP" ]; then
+		echo ""
+		echo "SKIPPED: $2"
+	elif [ "$1" = "WARN" ]; then
+		echo ""
+		echo "WARNING: $2"
+	elif [ $1 -ne 0 ]; then
 		echo ""
 		echo "There were errors."
 	fi
