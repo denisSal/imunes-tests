@@ -32,7 +32,7 @@ imunes -i
 
 if test -z "$TESTS"; then
 	# put longer tests near the beginning
-	tests=(combinations/* functional_tests/* services)
+	tests=(combinations/* functional_tests/* api_tests/* services)
 else
 	tests=($TESTS)
 fi

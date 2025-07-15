@@ -200,6 +200,18 @@ traceCheck () {
 	fi
 }
 
+APIstartNode () {
+	imunes --ctl -b -e $1 node start $2
+}
+
+APIstopNode () {
+	imunes --ctl -b -e $1 node stop $2
+}
+
+APIrestartNode () {
+	imunes --ctl -b -e $1 node restart $2
+}
+
 # Usage: stopNode node
 stopNode () {
 	if isOSlinux; then
