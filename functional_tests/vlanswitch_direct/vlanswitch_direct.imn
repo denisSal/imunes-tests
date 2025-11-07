@@ -1,0 +1,206 @@
+{
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "canvases" : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "nodes"    : {
+            "n0" : {
+                "label"       : "pc1",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 264",
+                "labelcoords" : "96 295"
+            },
+            "n1" : {
+                "label"       : "pc2",
+                "canvas"      : "c0",
+                "iconcoords"  : "408 72",
+                "labelcoords" : "408 103"
+            },
+            "n2" : {
+                "label"       : "pc3",
+                "canvas"      : "c0",
+                "iconcoords"  : "768 264",
+                "labelcoords" : "768 295"
+            },
+            "n3" : {
+                "label"       : "pc4",
+                "canvas"      : "c0",
+                "iconcoords"  : "408 504",
+                "labelcoords" : "408 535"
+            },
+            "n4" : {
+                "label"       : "switch1",
+                "canvas"      : "c0",
+                "iconcoords"  : "408 264",
+                "labelcoords" : "408 287"
+            }
+        },
+        "links"    : {
+            "l0" : {
+                "peers" : "n0 n4"
+            },
+            "l1" : {
+                "peers" : "n4 n1"
+            },
+            "l2" : {
+                "peers" : "n4 n2"
+            },
+            "l3" : {
+                "peers" : "n4 n3"
+            }
+        }
+    },
+    "nodes"   : {
+        "n0" : {
+            "type"                : "pc",
+            "name"                : "pc1",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "eth0",
+                    "link" : "l0",
+                    "mac"  : "42:00:aa:00:00:00"
+                },
+                "ifc2" : {
+                    "type"       : "vlan",
+                    "name"       : "vlan0",
+                    "vlan_dev"   : "eth0",
+                    "vlan_tag"   : "5",
+                    "ipv4_addrs" : ["50.0.0.1/24"]
+                },
+                "ifc3" : {
+                    "type"       : "vlan",
+                    "name"       : "vlan1",
+                    "vlan_dev"   : "eth0",
+                    "vlan_tag"   : "6",
+                    "ipv4_addrs" : ["60.0.0.1/24"]
+                }
+            }
+        },
+        "n1" : {
+            "type"                : "pc",
+            "name"                : "pc2",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "link"       : "l1",
+                    "ipv4_addrs" : ["50.0.0.2/24"],
+                    "mac"        : "42:00:aa:00:00:01"
+                }
+            }
+        },
+        "n2" : {
+            "type"                : "pc",
+            "name"                : "pc3",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "link"       : "l2",
+                    "ipv4_addrs" : ["60.0.0.3/24"],
+                    "mac"        : "42:00:aa:00:00:02"
+                }
+            }
+        },
+        "n3" : {
+            "type"                : "pc",
+            "name"                : "pc4",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "link"       : "l3",
+                    "ipv4_addrs" : ["60.0.0.4/24"],
+                    "mac"        : "42:00:aa:00:00:03"
+                }
+            }
+        },
+        "n4" : {
+            "type"           : "lanswitch",
+            "name"           : "switch1",
+            "ifaces"         : {
+                "ifc0" : {
+                    "type"      : "phys",
+                    "name"      : "e0",
+                    "link"      : "l0",
+                    "vlan_type" : "trunk"
+                },
+                "ifc1" : {
+                    "type"     : "phys",
+                    "name"     : "e1",
+                    "link"     : "l1",
+                    "vlan_tag" : "5"
+                },
+                "ifc2" : {
+                    "type"     : "phys",
+                    "name"     : "e2",
+                    "link"     : "l2",
+                    "vlan_tag" : "6"
+                },
+                "ifc3" : {
+                    "type"     : "phys",
+                    "name"     : "e3",
+                    "link"     : "l3",
+                    "vlan_tag" : "6"
+                }
+            },
+            "vlan_filtering" : "1"
+        }
+    },
+    "links"   : {
+        "l0" : {
+            "peers"        : "n0 n4",
+            "peers_ifaces" : "ifc1 ifc0",
+            "direct"       : "1"
+        },
+        "l1" : {
+            "peers"        : "n4 n1",
+            "peers_ifaces" : "ifc1 ifc1",
+            "direct"       : "1"
+        },
+        "l2" : {
+            "peers"        : "n4 n2",
+            "peers_ifaces" : "ifc2 ifc1",
+            "direct"       : "1"
+        },
+        "l3" : {
+            "peers"        : "n4 n3",
+            "peers_ifaces" : "ifc3 ifc1",
+            "direct"       : "1"
+        }
+    }
+}
