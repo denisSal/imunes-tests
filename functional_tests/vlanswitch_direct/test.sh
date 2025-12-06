@@ -8,7 +8,12 @@ if test -n "$LEGACY"; then
 	legacy=" -l"
 fi
 
-eid=`imunes$legacy -b vlanswitch_direct.imn | tail -1 | cut -d' ' -f4`
+debug=""
+if test -n "$DEBUG"; then
+	debug=" -d"
+fi
+
+eid=`imunes$legacy$debug -b vlanswitch_direct.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 echo "Checking if link l0 does not exist:"
@@ -73,6 +78,6 @@ else
 	err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
 
 thereWereErrors $err

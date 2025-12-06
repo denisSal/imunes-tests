@@ -8,11 +8,16 @@ if test -n "$LEGACY"; then
 	legacy=" -l"
 fi
 
+debug=""
+if test -n "$DEBUG"; then
+	debug=" -d"
+fi
+
 # execute ext topology
-exteid=`imunes$legacy -b -e hurj ext.imn | tail -1 | cut -d' ' -f4`
+exteid=`imunes$legacy$debug -b -e hurj ext.imn | tail -1 | cut -d' ' -f4`
 startCheck "$exteid"
 
-eid=`imunes$legacy -b topo.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b topo.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 echo "Checking if link l0 exists:"
@@ -77,9 +82,9 @@ else
 	err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
 
 # terminate ext topology
-imunes$legacy -b -e $exteid
+imunes$legacy$debug -b -e $exteid
 
 thereWereErrors $err

@@ -13,7 +13,12 @@ if test -n "$LEGACY"; then
 	legacy=" -l"
 fi
 
-eid=`imunes$legacy -b topo.imn | tail -1 | cut -d' ' -f4`
+debug=""
+if test -n "$DEBUG"; then
+	debug=" -d"
+fi
+
+eid=`imunes$legacy$debug -b topo.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 echo "Checking if link l0 exists:"
@@ -40,6 +45,6 @@ if [ $? -eq 0 ]; then
 	err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
 
 thereWereErrors $err

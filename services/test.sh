@@ -8,7 +8,12 @@ if test -n "$LEGACY"; then
     legacy=" -l"
 fi
 
-eid=`imunes$legacy -b services.imn | awk '/Experiment/{print $4; exit}'`
+debug=""
+if test -n "$DEBUG"; then
+    debug=" -d"
+fi
+
+eid=`imunes$legacy$debug -b services.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 # wait for the services to start
