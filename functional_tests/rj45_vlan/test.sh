@@ -39,7 +39,7 @@ else
 	ngctl msg rjvlanlink: setcfg {header_offset=14}
 fi
 
-eid=`imunes$legacy$debug -b rj45vlan.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b rj45vlan.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
@@ -59,7 +59,7 @@ fi
 
 imunes$legacy$debug -b -e $eid
 
-eid=`imunes$legacy$debug -b rj45vlan_directlink.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b rj45vlan_directlink.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp

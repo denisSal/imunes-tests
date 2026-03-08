@@ -18,7 +18,7 @@ if test -n "$DEBUG"; then
 	debug=" -d"
 fi
 
-eid=`imunes$legacy$debug -b topo.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b topo.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 if isOSlinux; then

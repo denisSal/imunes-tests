@@ -14,10 +14,11 @@ if test -n "$DEBUG"; then
 fi
 
 # execute ext topology
-exteid=`imunes$legacy$debug -b -e exrj ext.imn | tail -1 | cut -d' ' -f4`
+exteid=`imunes$legacy$debug -b -e exrj ext.imn | awk '/Experiment/{print $4; exit}'`
+
 startCheck "$exteid"
 
-eid=`imunes$legacy$debug -b topo.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b topo.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 echo "Checking if link l0 exists:"

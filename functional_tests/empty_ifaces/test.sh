@@ -13,7 +13,7 @@ if test -n "$DEBUG"; then
 	debug=" -d"
 fi
 
-eid=`imunes$legacy$debug -b empty.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b empty.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp

@@ -13,7 +13,7 @@ if test -n "$DEBUG"; then
 	debug=" -d"
 fi
 
-eid=`imunes$legacy$debug -b vlanswitch.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b vlanswitch.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 echo "Checking if link l0 exists:"
