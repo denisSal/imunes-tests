@@ -15,7 +15,7 @@ fi
 
 debug=""
 if test -n "$DEBUG"; then
-	debug=" -d"
+	debug=" -dd DEBUG.log"
 fi
 
 # execute ext topology

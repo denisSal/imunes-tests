@@ -10,7 +10,7 @@ fi
 
 debug=""
 if test -n "$DEBUG"; then
-    debug=" -d"
+    debug=" -dd DEBUG.log"
 fi
 
 eid=`imunes$legacy$debug -b services.imn | awk '/Experiment/{print $4; exit}'`
